@@ -53,7 +53,7 @@ module.exports.Login = async (req, res, next) => {
         // Get the login credentials from req body
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).json({ message: 'All fields are required' })
+            return res.json({ message: 'All fields are required' })
         }
 
         // Get the user from DB
@@ -61,13 +61,13 @@ module.exports.Login = async (req, res, next) => {
 
         // If not found
         if (!user) {
-            return res.status(400).json({ message: 'Invalid username or password' })
+            return res.json({ message: 'Invalid username or password' })
         }
 
         // Check password match
         const auth = await bcrypt.compare(password, user.password);
         if (!auth) {
-            return res.status(400).json({ message: 'Invalid username or password' })
+            return res.json({ message: 'Invalid username or password' })
         }
 
         // Generate new token

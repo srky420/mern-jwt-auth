@@ -1,7 +1,12 @@
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 
-export const Home = () => {
+const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      Home
+    </div>
   )
 }
+
+export default Home;

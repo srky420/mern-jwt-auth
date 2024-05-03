@@ -11,7 +11,7 @@ const { MONGO_URI, PORT } = process.env;
 // Apply Middlewares
 app.use(
     cors({
-        origin: ['http://localhost:3000'],
+        origin: ['http://localhost:3000', 'http://localhost:5173'],
         methods: ['GET', 'PUT', 'POST', 'DELETE'],
         credentials: true
     })
