@@ -23,6 +23,6 @@ module.exports.UserVerification = (req, res) => {
         if (!user) {
             return res.json({ status: false });
         }
-        return res.json({ status: true });
+        return res.json({ status: true, username: user.username });
     })
 }

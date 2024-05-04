@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 export const Signup = () => {
 
-  const cookies = useCookies();
   const navigate = useNavigate();
 
+  // Define cookies
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
   // Input state
   const [state, setState] = useState({
@@ -16,6 +17,13 @@ export const Signup = () => {
     email: '',
     password: ''
   });
+
+  // Use effect
+  useEffect(() => {
+    if (cookies.token) {
+      return navigate('/');
+    }
+  }, []);
 
   // Handle onChange of inputs
   const handleOnChange = (e:any) => {
