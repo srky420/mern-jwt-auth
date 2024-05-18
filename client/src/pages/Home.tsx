@@ -33,13 +33,13 @@ const Home = () => {
       );
 
       const { status, username } = data;
-      setState(prevState => ({
-        ...prevState,
-        username: username
-      }));
 
       // Return based on status
       if (status) {
+        setState(prevState => ({
+          ...prevState,
+          username: username
+        }));
         return toast.success(`Welcome Back, ${username}`, {
           position: 'bottom-right'
         });
@@ -50,14 +50,16 @@ const Home = () => {
     }
     verifyCookie();
 
-  }, [cookies, removeCookie, setCookie, navigate]);
+  }, [cookies, removeCookie]);
 
   // Handle logout
   const handleLogout = () => {
     removeCookie('token');
     navigate('/login');
+    toast.success('Yov have been logged out', {
+      position: 'bottom-right'
+    });
   };
-
 
   return (
     <div>

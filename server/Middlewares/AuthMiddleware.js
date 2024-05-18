@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 
 // Define auth middleware
-module.exports.UserVerification = (req, res) => {
+module.exports.UserVerification = (req, res, next) => {
     
     // Get token from cookies
     const token = req.cookies.token;
@@ -19,10 +19,7 @@ module.exports.UserVerification = (req, res) => {
         if (err) {
             return res.json({ status: false });
         }
-        const user = await User.findById(data.id);
-        if (!user) {
-            return res.json({ status: false });
-        }
-        return res.json({ status: true, username: user.username });
-    })
+        req.id = data.id;
+        next();
+    });
 }

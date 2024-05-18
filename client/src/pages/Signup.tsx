@@ -15,12 +15,16 @@ export const Signup = () => {
   const [state, setState] = useState({
     username: '',
     email: '',
-    password: ''
+    password: '',
+    isBusy: false
   });
 
   // Use effect
   useEffect(() => {
     if (cookies.token) {
+      toast.success("Already logged in", {
+        position: 'bottom-right'
+      })
       return navigate('/');
     }
   }, []);
@@ -52,6 +56,10 @@ export const Signup = () => {
   // Handle form submission
   const handleSubmit = async (e:any) => {
     e.preventDefault();
+    setState(prevState => ({
+      ...prevState,
+      isBusy: true
+    }));
     // Submit the form
     try {
       // POST request to server
@@ -87,11 +95,10 @@ export const Signup = () => {
       ...prevState,
       username: '',
       email: '',
-      password: ''
+      password: '',
+      isBusy: false
     }));
   }
-
-
 
   return (
     <div>

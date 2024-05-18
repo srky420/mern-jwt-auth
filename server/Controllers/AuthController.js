@@ -2,7 +2,6 @@ const { createSecretToken } = require('../util/SecretToken');
 const User = require('../Models/UserModel');
 const bcrypt = require('bcrypt');
 
-
 // Controller for Signup
 module.exports.Signup = async (req, res, next) => {
     try {   
@@ -37,15 +36,11 @@ module.exports.Signup = async (req, res, next) => {
             success: true,
             user
         });
-
-        // Call next
-        next();
     }
     catch (e) {
         console.error(e);
     }
 }
-
 
 // Controller for Login
 module.exports.Login = async (req, res, next) => {
@@ -71,7 +66,7 @@ module.exports.Login = async (req, res, next) => {
         }
 
         // Generate new token
-        const token = createSecretToken(user.id);
+        const token = createSecretToken(user._id);
 
         // Set cookie
         res.cookie('token', token, {
@@ -84,9 +79,6 @@ module.exports.Login = async (req, res, next) => {
             message: 'User logged in successfully',
             success: true,
         });
-
-        // Call next
-        next();
     }   
     catch (e) {
         console.error(e);

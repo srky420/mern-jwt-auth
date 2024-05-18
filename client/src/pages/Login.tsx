@@ -18,6 +18,9 @@ export const Login = () => {
   // Use effect
   useEffect(() => {
     if (cookies.token) {
+      toast.success("Already logged in", {
+        position: 'bottom-right'
+      });
       return navigate('/');
     }
   }, []);
